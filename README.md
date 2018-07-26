@@ -37,14 +37,14 @@ After doing hundreds of masternode installations in the past two years, i decide
 
 Comparing with building from source manually, you will benefit from using this script in the following way(s):
 
-* 100% auto-compilation and 99% of configuration on the masternode side of things. It is currently only tested on a vultr VPS but should work almost anywhere where IPv6 addresses are available
-* Developed with recent Ubuntu versions in mind, currently only 16.04 is supported
-* Installs 1-100 (or more!) masternodes in parallel on one machine, with individual config and data
-* Compilation is currently from source for the desired git repo tag (configurable via config files)
+- 100% auto-compilation and 99% of configuration on the masternode side of things. It is currently only tested on a vultr VPS but should work almost anywhere where IPv6 addresses are available
+- Developed with recent Ubuntu versions in mind, currently only 16.04 is supported
+- Installs 1-100 (or more!) masternodes in parallel on one machine, with individual config and data
+- Compilation is currently from source for the desired git repo tag (configurable via config files)
   Some security hardening is done, including firewalling and a separate user
-* Automatic startup for all masternode daemons
-* This script needs to run as root, the masternodes will and should not!
-* It's ipv6 enabled, tor/onion will follow
+- Automatic startup for all masternode daemons
+- This script needs to run as root, the masternodes will and should not!
+- It's ipv6 enabled, tor/onion will follow
 
 ## Installation
 
@@ -108,7 +108,8 @@ The _install.sh_ script support the following parameters:
 | --sentinel   | -s           | --                  | install and configure sentinel for node monitoring                  |
 | --wipe       | -w           | --                  | uninstall & wipe all related master node data, combine with -p flag |
 | --help       | -h           | --                  | print help info                                                     |
-| --startnodes | -x           | --                  | starts masternode(s) after installation                             |
+| --startnodes | -x           | --                  | starts masternode(s) after installation (can be used with -k)       |
+| --mnprivkey  | -k           | "5eHrckrfHiypU4..." | adds your masternode private key after installation                 |
 
 ## Troubleshooting the masternode on the VPS
 
@@ -214,14 +215,14 @@ The management script release will follow within the next couple of days.
 
 # Todo
 
-* provide my Dockerfile & Vagrantfile
-* write more test cases
-* implement a binary option (?)
-* output all supported cryptos as list within help
+- provide my Dockerfile & Vagrantfile
+- write more test cases
+- implement a binary option (?)
+- output all supported cryptos as list within help
 
 # Errors
 
-* currently not fully idempotent
+- currently not fully idempotent
 
 Ping me at contact@marsmenschen.com for questions and send some crypto my way if you are happy.
 
