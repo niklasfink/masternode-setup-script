@@ -120,12 +120,12 @@ function install_packages() {
     libboost-all-dev libssl-dev make autoconf libtool git apt-utils g++ \
     libprotobuf-dev pkg-config libcurl3-dev libudev-dev libqrencode-dev bsdmainutils \
     pkg-config libssl-dev libgmp3-dev libevent-dev jp2a pv virtualenv libdb4.8-dev libdb4.8++-dev  &>> ${SCRIPT_LOGFILE}
-    
+
     # only for 18.04 // openssl
     if [[ "${VERSION_ID}" == "18.04" ]] ; then
        apt-get -qqy -o=Dpkg::Use-Pty=0 -o=Acquire::ForceIPv4=true install libssl1.0-dev
-    fi    
-    
+    fi
+
 }
 
 #
@@ -290,8 +290,15 @@ function create_mn_configuration() {
                 fi
                 # replace placeholders
                 echo "running sed on file ${MNODE_CONF_BASE}/${CODENAME}_n${NUM}.conf"                                &>> ${SCRIPT_LOGFILE}
+
+                if [ ${mnprivkey} -ne 0 ]; then
+                    #put in Masternode Private Key
+                    sed 's/HERE_GOES_YOUR_MASTERNODE_KEY_FOR_MASTERNODE_XXX_GIT_PROJECT_XXX_XXX_NUM_XXX/${mnprivkey}/' -i ${MNODE_CONF_BASE}/${CODENAME}_n${NUM}.conf
+                fi
+
                 sed -e "s/XXX_GIT_PROJECT_XXX/${CODENAME}/" -e "s/XXX_NUM_XXY/${NUM}]/" -e "s/XXX_NUM_XXX/${NUM}/" -e "s/XXX_PASS_XXX/${PASS}/" -e "s/XXX_IPV6_INT_BASE_XXX/[${IPV6_INT_BASE}/" -e "s/XXX_NETWORK_BASE_TAG_XXX/${NETWORK_BASE_TAG}/" -e "s/XXX_MNODE_INBOUND_PORT_XXX/${MNODE_INBOUND_PORT}/" -i ${MNODE_CONF_BASE}/${CODENAME}_n${NUM}.conf
-                if [ "$startnodes" -eq 1 ]; then
+
+                if [ "$startnodes" -eq 1 ] && [ ${mnprivkey} -eq 0 ]; then
                     #uncomment masternode= and masternodeprivkey= so the node can autostart and sync
                     sed 's/\(^.*masternode\(\|privkey\)=.*$\)/#\1/' -i ${MNODE_CONF_BASE}/${CODENAME}_n${NUM}.conf
                 fi
