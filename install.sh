@@ -293,7 +293,7 @@ function create_mn_configuration() {
 
                 if [ ${mnprivkey} -ne 0 ]; then
                     #put in Masternode Private Key
-                    sed 's/HERE_GOES_YOUR_MASTERNODE_KEY_FOR_MASTERNODE_XXX_GIT_PROJECT_XXX_XXX_NUM_XXX/${mnprivkey}/' -i ${MNODE_CONF_BASE}/${CODENAME}_n${NUM}.conf
+                    sed -e "s/HERE_GOES_YOUR_MASTERNODE_KEY_FOR_MASTERNODE_XXX_GIT_PROJECT_XXX_XXX_NUM_XXX/${mnprivkey}/" -i ${MNODE_CONF_BASE}/${CODENAME}_n${NUM}.conf
                 fi
 
                 sed -e "s/XXX_GIT_PROJECT_XXX/${CODENAME}/" -e "s/XXX_NUM_XXY/${NUM}]/" -e "s/XXX_NUM_XXX/${NUM}/" -e "s/XXX_PASS_XXX/${PASS}/" -e "s/XXX_IPV6_INT_BASE_XXX/[${IPV6_INT_BASE}/" -e "s/XXX_NETWORK_BASE_TAG_XXX/${NETWORK_BASE_TAG}/" -e "s/XXX_MNODE_INBOUND_PORT_XXX/${MNODE_INBOUND_PORT}/" -i ${MNODE_CONF_BASE}/${CODENAME}_n${NUM}.conf
