@@ -745,7 +745,7 @@ startnodes=0;
 mnprivkey=0;
 
 # Execute getopt
-ARGS=$(getopt -o "hp:n:c:r:wsudx" -l "help,project:,net:,count:,release:,wipe,sentinel,update,debug,startnodes,setmnprivkey" -n "install.sh" -- "$@");
+ARGS=$(getopt -o "hp:n:c:r:k:wsudx" -l "help,project:,net:,count:,release:,wipe,sentinel,update,debug,startnodes,mnprivkey" -n "install.sh" -- "$@");
 
 #Bad arguments
 if [ $? -ne 0 ];
