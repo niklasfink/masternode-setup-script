@@ -735,9 +735,10 @@ debug=0;
 update=0;
 sentinel=0;
 startnodes=0;
+mnprivkey=0;
 
 # Execute getopt
-ARGS=$(getopt -o "hp:n:c:r:wsudx" -l "help,project:,net:,count:,release:,wipe,sentinel,update,debug,startnodes" -n "install.sh" -- "$@");
+ARGS=$(getopt -o "hp:n:c:r:wsudx" -l "help,project:,net:,count:,release:,wipe,sentinel,update,debug,startnodes,setmnprivkey" -n "install.sh" -- "$@");
 
 #Bad arguments
 if [ $? -ne 0 ];
@@ -783,6 +784,14 @@ while true; do
                     then
                         release="$1";
                         SCVERSION="$1"
+                        shift;
+                    fi
+            ;;
+        -k|--mnprivkey)
+            shift;
+                    if [ -n "$1" ];
+                    then
+                        mnprivkey="$1";
                         shift;
                     fi
             ;;
@@ -880,7 +889,7 @@ main() {
         echo "SETUP_MNODES_COUNT: ${count}"
         echo "NETWORK_TYPE: ${NETWORK_TYPE}"
         echo "NETWORK_TYPE: ${net}"
-
+        echo "MNPRIVKEY:            ${mnprivkey}"
         echo "END OPTIONS => "
         echo "********************** VALUES AFTER CONFIG SOURCING: ************************"
     fi
